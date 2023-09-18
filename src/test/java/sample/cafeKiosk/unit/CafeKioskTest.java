@@ -1,5 +1,6 @@
 package sample.cafeKiosk.unit;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import sample.cafeKiosk.unit.beverages.Americano;
 import sample.cafeKiosk.unit.beverages.Latte;
@@ -42,6 +43,8 @@ class CafeKioskTest {
                 .hasMessage("음료는 1잔 이상 주문하실 수 있습니다.");
     }
 
+    //    @DisplayName("음료 1개 추가 테스트")
+    @DisplayName("음료 1개를 추가하면 주문 목록에 담긴다.")
     @Test
     void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
@@ -77,8 +80,10 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
 
+    @DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
     @Test
     void calculateTotalPrice() {
+        // given
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
         Latte latte = new Latte();
@@ -86,8 +91,10 @@ class CafeKioskTest {
         cafeKiosk.add(americano);
         cafeKiosk.add(latte);
 
+        // when
         int totalPrice = cafeKiosk.calculateTotalPrice();
 
+        // then
         assertThat(totalPrice).isEqualTo(8500);
     }
 
