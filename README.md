@@ -3,6 +3,37 @@
 
 ## ✍️ Commit organizing
 
+[Spring & JPA 기반 테스트 (5)](https://github.com/mingeonho1/practical-testing/commit/479213dd7075ca4ae23d7bde01c6383f564243dd)
+- Presentation Layer 테스트 진행중
+- WebMvcTest,
+  MockMvc,
+  MockBean - (site.mockito.org)
+- post같은 경우에는 http body에 값을 넣다보니 직렬화와 역직렬화 과정을 거치게 된다.
+  그래서 만든 object를 json형태로 직렬화를 거쳐서 넣어줘야한다.
+- controller 테스트에서 request validation 예외 테스트까지
+  - NotBlank, NotNull, NotEmpty의 차이점
+   : NotNull = null이 아니면 된다. ("", " " 통과)
+     NotEmpty = ""만 통과 못하고 " " 공백이 있으면 통과
+     NotBlank = 위에 경우를 다 통과 X
+  - 상품 이름은 20자 제한
+   : 이걸 Controller에서 제한 하는게 맞을까? 고민필요
+     -> 더 안 쪽 레이어에서 검증하는게 좋을 것 같다.
+        (꼭 한 레이어에서 검증을 하지 않아도 된다.)
+        validation의 책임을 분리해서 검증할지, 고민해보기
+- Controller의 request와 Service request를 분리해서 구성
+  : 의존성을 줄여줘서 모듈을 분리할 때도 좋고, 역할도 분리할 수 있음 (controller에서 받는 request에서만 validation을 하면 됨)
+
+<br>
+
+[Spring & JPA 기반 테스트 (4)](https://github.com/mingeonho1/practical-testing/commit/e1d7a8781c95acc4530d4c7f358a5259e1920f12)
+- Presentation Layer 테스트 진행중
+- TDD 익숙해지기
+- Transactional
+  : - readOnly = true : 읽기전용
+    - CRUD 에서 CUD 동작 X / Only Read
+    - JPA: CUD 스냅샷 저장, 변경감지 x (성능 향상)
+    - CQRS - Command / Query 를 분리하자
+
 <br>
 
 [Spring & JPA 기반 테스트 (3)](https://github.com/mingeonho1/practical-testing/commit/fe52b82f7e95845e219c8b66f8bf063c1d368243)
