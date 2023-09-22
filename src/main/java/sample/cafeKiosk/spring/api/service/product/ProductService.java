@@ -3,7 +3,7 @@ package sample.cafeKiosk.spring.api.service.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.cafeKiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import sample.cafeKiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafeKiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafeKiosk.spring.domain.product.Product;
 import sample.cafeKiosk.spring.domain.product.ProductRepository;
@@ -31,7 +31,7 @@ public class ProductService {
     // 빈도수가 적다면 productNumber를 유니크값으로 만들어서 만약 등록 실패를 했다면 다시 시도하게 만들기
     // 빈도수가 많다면 정책을 바꿔서 처음부터 UUID로 만들기
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
@@ -44,8 +44,8 @@ public class ProductService {
         List<Product> products = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
 
         return products.stream()
-                .map(ProductResponse::of)
-                .collect(Collectors.toList());
+            .map(ProductResponse::of)
+            .collect(Collectors.toList());
     }
 
     private String createNextProductNumber() {
