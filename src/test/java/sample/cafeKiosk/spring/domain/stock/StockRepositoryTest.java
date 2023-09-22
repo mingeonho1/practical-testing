@@ -14,7 +14,7 @@ import static org.assertj.core.groups.Tuple.tuple;
 class StockRepositoryTest {
 
     @Autowired
-    StockRepository stockRepository;
+    private StockRepository stockRepository;
 
     @DisplayName("상품번호 리스트로 재고를 조회한다.")
     @Test
