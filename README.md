@@ -3,6 +3,11 @@
 
 ## ✍️ Commit organizing
 
+#### [Mock을 마주하는 자세](https://github.com/mingeonho1/practical-testing/commit/f590f2d1997863c69ac4c4ec79f0b96b444f01bc)
+- Mockito로 Stubbing 하기
+  - 이메일 전송 같은 네트워크 자원을 쓰고 만약에 메일 전송을 진짜로 하게되면 메일전송에 대한 과금이 될 수도 있다.
+   그럴 때 Mock객체를 사용해서 미리 Stubbing으로 행동을 조작할 수 있다.
+
 #### [Spring & JPA 기반 테스트 마무리 - [키워드 정리]]()
 **🏴 Layered Architecture** <br>
 - 레이어드 아키텍처는 소프트웨어 디자인에서 널리 사용되는 아키텍처 패턴
