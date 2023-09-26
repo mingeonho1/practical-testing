@@ -3,6 +3,40 @@
 
 ## ✍️ Commit organizing
 
+### Classicist VS. Mockist
+- 실제 프로덕션 코드에서 런타임 시점에서 일어난 일을 정확하게 Stubbing 했다고 단언할 수 있을까?
+- 비용을 조금이라도 더 들여서 실제 구현체를 불러와서 최대한 넓은 범위의 실제 객체를 테스트하는 것이 좋지 않을까?
+
+### [BDDMockito](https://github.com/mingeonho1/practical-testing/commit/a9f157c5906280c4a30acf65219ada4c5ba635e5)
+- Mockito ➝ BDDMockito
+- 기능은 다 똑같은데 함수명이나 그런 것만 BDD스럽게 수정
+
+### [@mock, @SPY, @Injectmocks](https://github.com/mingeonho1/practical-testing/commit/3f45656e3aa8c7d987324351a844fdba2de486f9)
+```java
+Mockito.mock(MailSendClient.class)
+↓
+@Mock
+private MailSendClient mailSendClient;
+```
+
+```java
+Mockito.mock(MailSendHistoryRepository.class)
+↓
+@Mock
+private MailSendHistoryRepository mailSendHistoryRepository;
+```
+
+```java
+new MailService(mailSendClient, mailSendHistoryRepository)
+↓
+@InjectMocks
+private MailService mailService;
+```
+
+- Mokcito.mock ➝ withSettings() ➝ RETURNS_DEFAULTS
+  - @Mock에 아무 설정을 주지 않으면 RETURNS_DEFAULTS로 설정된다. Mock 객체가 stubbing 되지 않았으면, 빈 값을 반환한다.
+- `@Spy` 어노테이션을 사용하면 실제 객체에 대해 일부 메소드만을 스터빙(stubbing)하거나 모킹(mocking)할 수 있습니다.
+
 ### Test Double
 **✔️ Dummy**
 - 아무 것도 하지 않는 깡통 객체
