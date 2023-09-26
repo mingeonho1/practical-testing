@@ -26,6 +26,11 @@ public class MailService {
 
         if (result) {
             mailSendHistoryRepository.save(mailSendHistory);
+
+            mailSendClient.a();
+            mailSendClient.b();
+            mailSendClient.c();
+            
             return true;
         }
 
