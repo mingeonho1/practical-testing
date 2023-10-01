@@ -4,10 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import sample.cafeKiosk.spring.client.mail.MailSendClient;
+import sample.cafeKiosk.spring.IntegrationTestSupport;
 import sample.cafeKiosk.spring.domain.history.mail.MailSendHistory;
 import sample.cafeKiosk.spring.domain.history.mail.MailSendHistoryRepository;
 import sample.cafeKiosk.spring.domain.order.Order;
@@ -26,9 +23,7 @@ import static sample.cafeKiosk.spring.domain.order.OrderStatus.PAYMENT_COMPLETED
 import static sample.cafeKiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafeKiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class OrderStatisticsServiceTest {
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderStatisticsService orderStatisticsService;
@@ -44,9 +39,6 @@ class OrderStatisticsServiceTest {
 
     @Autowired
     private MailSendHistoryRepository mailSendHistoryRepository;
-
-    @MockBean
-    MailSendClient mailSendClient;
 
     @AfterEach
     void tearDown() {
@@ -79,7 +71,7 @@ class OrderStatisticsServiceTest {
         // stubbing
         when(mailSendClient.sendMail(any(String.class), any(String.class), any(String.class), any(String.class)))
             .thenReturn(true);
-        
+
         // when
         boolean result = orderStatisticsService.sendOrderStatisticsMail(now.toLocalDate(), "test@test.com");
 

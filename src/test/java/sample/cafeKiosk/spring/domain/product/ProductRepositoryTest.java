@@ -3,8 +3,8 @@ package sample.cafeKiosk.spring.domain.product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+import sample.cafeKiosk.spring.IntegrationTestSupport;
 
 import java.util.List;
 
@@ -13,10 +13,8 @@ import static org.assertj.core.groups.Tuple.tuple;
 import static sample.cafeKiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafeKiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-//@SpringBootTest
-@DataJpaTest    // Jpa 관련된 Bean들만 로딩을 하기 때문에 SpringBootTest에 비해 속도가 빠르다.
-class ProductRepositoryTest {
+@Transactional
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
@@ -36,11 +34,11 @@ class ProductRepositoryTest {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("productNumber", "name", "sellingStatus")
-                .containsExactlyInAnyOrder(
-                        tuple("001", "아메리카노", SELLING),
-                        tuple("002", "카페라떼", HOLD)
-                );
+            .extracting("productNumber", "name", "sellingStatus")
+            .containsExactlyInAnyOrder(
+                tuple("001", "아메리카노", SELLING),
+                tuple("002", "카페라떼", HOLD)
+            );
 
     }
 
@@ -59,11 +57,11 @@ class ProductRepositoryTest {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("productNumber", "name", "sellingStatus")
-                .containsExactlyInAnyOrder(
-                        tuple("001", "아메리카노", SELLING),
-                        tuple("002", "카페라떼", HOLD)
-                );
+            .extracting("productNumber", "name", "sellingStatus")
+            .containsExactlyInAnyOrder(
+                tuple("001", "아메리카노", SELLING),
+                tuple("002", "카페라떼", HOLD)
+            );
 
     }
 
@@ -100,11 +98,11 @@ class ProductRepositoryTest {
 
     private static Product createProduct(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
         return Product.builder()
-                .productNumber(productNumber)
-                .type(type)
-                .sellingStatus(sellingStatus)
-                .name(name)
-                .price(price)
-                .build();
+            .productNumber(productNumber)
+            .type(type)
+            .sellingStatus(sellingStatus)
+            .name(name)
+            .price(price)
+            .build();
     }
 }

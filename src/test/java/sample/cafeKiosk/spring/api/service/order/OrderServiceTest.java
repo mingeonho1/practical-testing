@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafeKiosk.spring.IntegrationTestSupport;
 import sample.cafeKiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafeKiosk.spring.api.service.order.response.OrderResponse;
 import sample.cafeKiosk.spring.domain.order.OrderRepository;
@@ -25,10 +24,7 @@ import static org.assertj.core.groups.Tuple.tuple;
 import static sample.cafeKiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafeKiosk.spring.domain.product.ProductType.*;
 
-@ActiveProfiles("test")
-//@Transactional
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
